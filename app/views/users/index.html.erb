@@ -1,0 +1,60 @@
+<h3>Change Managers</h3>
+
+
+<div>
+  <h4>Customer</h4>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @customer_contacts.each do |customer_contact| %>
+        <tr>
+          <td><%= customer_contact.name %></td>
+          <td><%= customer_contact.email %></td>
+          <td></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<p></p>
+
+
+<div>
+  <h4>Provider</h4>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= link_to 'Show', user %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <p>
+  <%= link_to 'Add 1A Change Manager', new_user_path, :class => "btn btn-default" %>
+  </p>
+</div>

@@ -1,0 +1,51 @@
+<h2>Change Requests</h2>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Tst</th>
+      <th>Int</th>
+      <th>Prd</th>
+      <th>Customer</th>
+      <th>Provider</th>
+      <th>Status</th>
+      <th>Comment</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @changes.each do |change| %>
+      <tr>
+        <td>
+            <%= link_to (change) do %>
+                <strong>
+                    <div data-toggle="tooltip" data-container="body" data-placement="right" title="<%= change.short_description %>" class="remark">
+                        CR<%= change.number %>
+                    </div>
+                </strong>
+            <% end %>
+        </td>
+        <td><%= change.load_on_test.to_formatted_s(:short) unless change.load_on_test.nil? %></td>
+        <td><%= change.load_on_int.to_formatted_s(:short) unless change.load_on_int.nil? %></td>
+        <td><%= change.load_on_prod.to_formatted_s(:short) unless change.load_on_prod.nil? %></td>
+        <td><%= change.customer_contact.try(:name) %></td>
+        <td><%= change.user.try(:name) %></td>
+        <td><%= change.change_status.try(:status) %></td>
+        <td>
+            <div data-toggle="tooltip" data-container="body" data-placement="top" title="<%= change.comment %>" class="remark" >
+                <%= truncate(change.comment) %>
+            </div>
+        </td>
+        <td><%= link_to 'Edit', edit_change_path(change) , :class => "btn btn-primary btn-xs" %></td>
+        <td><%= link_to 'Delete', change, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-warning btn-xs"  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Change', new_change_path, :class => "btn btn-default" %>

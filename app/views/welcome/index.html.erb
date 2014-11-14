@@ -1,0 +1,135 @@
+<h2>Change Requests</h2>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="list-group">
+            <%= link_to(changes_path, class: 'list-group-item')  do %>
+                <span class='badge'><%=@changes.count%></span> All
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-5">
+        <div class="list-group">
+            <%= link_to(changes_path, class: 'list-group-item')  do %>
+                <span class='badge'><%=@changes.where(:user_id => nil).size %></span>  Not assigned
+            <% end %>
+        </div>
+        <h4></h4>
+    </div>
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-5">
+        <h4>By Provider Change Manager</h4>
+
+        <div class="list-group">
+            <% @users.each do |user| %>
+                <%= link_to(user, class: 'list-group-item') do %>
+                    <span class='badge'><%=user.changes.count%></span> <%= user.name %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-5">
+        <h4>By Customer Change Manager</h4>
+        <div class="list-group">
+            <% @customer_contacts.each do |contact| %>
+                <%= link_to(contact, class: "list-group-item") do %>
+                    <span class='badge'><%=contact.changes.count%></span> <%= contact.name %>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-5">
+        <h4>New in the last 7 days</h4>
+        <ul class="list-group">
+            <% @new_changes_last_7_days.each do |new_change| %>
+                <%= link_to(new_change, class: 'list-group-item')  do %>
+                <b>CR<%= new_change.number %></b> - <%= new_change.short_description %>
+                    <br><small class="text-muted"> created <%= time_ago_in_words(new_change.created_at) %> ago</small>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-5">
+        <!--
+        <h4>Closed in the last 7 days</h4>
+        <ul class="list-group">
+            <li class="list-group-item">CR1002 - Some unused stuff</li>
+        </ul>
+        -->
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-5">
+        <h4>Updated in the last 7 days</h4>
+        <ul class="list-group">
+            <% @updated_changes_last_7_days.each do |updated_change| %>
+                <%= link_to(updated_change, class: 'list-group-item')  do %>
+                <b>CR<%= updated_change.number %></b> - <%= updated_change.short_description %>
+                    <br><small class="text-muted"> updated <%= time_ago_in_words(updated_change.updated_at) %> ago</small>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-5">
+        <!--
+        <h4>Closed in the last 7 days</h4>
+        <ul class="list-group">
+            <li class="list-group-item">CR1002 - Some unused stuff</li>
+        </ul>
+        -->
+    </div>
+
+</div>
+
+
+<!--
+<div class="row">
+
+    <div class="col-md-6">
+        <h4>Overdue</h4>
+        <ul>
+            <li>CR0412 - Some nice text</li>
+        </ul>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Closed</h4>
+        <ul>
+            <li>CR0002 - Something very useful</li>
+        </ul>
+
+    </div>
+
+</div>
+-->
+

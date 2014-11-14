@@ -1,0 +1,4 @@
+# Use the README file as a reference to customize settings.
+
+admin:
+  Micropost: create, read, update, delete

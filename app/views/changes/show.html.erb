@@ -1,0 +1,118 @@
+<p id="notice"><%= notice %></p>
+
+<h3>CR<%= @change.number %> - <%= @change.short_description %> <small><%= link_to ' - edit this', edit_change_path(@change), :class => "text-muted"%></small></h3>
+
+<hr>
+
+<div class="row">
+
+        <div class="col-md-3">
+            <h4><span class="glyphicon glyphicon-info-sign"></span> General Information</h4>
+            <%= show_for @change do |c| %>
+                <%= c.attribute :accepted_at, :format => :short %>
+                <%= c.association :change_status, :using => :status %>
+            <% end %>
+        </div>
+        <div class="col-md-3">
+            <h4> &nbsp;</h4>
+            <%= show_for @change do |c| %>
+                <%= c.attribute :updated_at, :format => :short %>
+                <%= c.attribute :airline_id %>
+            <% end %>
+        </div>
+
+    <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-folder-open"></span> References</h4>
+        <p class="wrapper"><strong class="label">Tracker</strong><br><a href="http://xyz.net/NotesLink/nl?RNID=<%=  @change.tracker_id%>"><%=  @change.tracker_id%></a></p>
+
+
+    </div>
+    <div class="col-md-3">
+        <h4> &nbsp;</h4>
+        <p class="wrapper"><strong class="label">Documents</strong><br><a href="#">CR-xyz</a></p>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-euro"></span> Offer Process</h4>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :offer_due_at, :format => :long %>
+            <%= c.attribute :ordered_at, :format => :long, :if_blank => "-" %>
+        <% end %>
+    </div>
+    <div class="col-md-3">
+        <h4> &nbsp;</h4>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :offer_delivered_at, :format => :short, :if_blank => "-"  %>
+        <% end %>
+    </div>
+    <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-user"></span> Change Managers</h4>
+        <%= show_for @change do |c| %>
+            <%= c.association :customer_contact %>
+        <% end %>
+    </div>
+    <div class="col-md-3">
+        <h4> &nbsp;</h4>
+        <%= show_for @change do |c| %>
+                <%= c.association :user %>
+        <% end %>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-3">
+        <h4 class="blue"><span class="glyphicon glyphicon-calendar"></span>  Deployment Dates</h4>
+        <h5>Planned</h5>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :load_on_test, :format => :long %>
+            <%= c.attribute :load_on_int, :format => :long %>
+            <%= c.attribute :load_on_prod, :format => :long %>
+        <% end %>
+    </div>
+    <div class="col-md-3">
+        <h4> &nbsp;</h4>
+        <h5>Deployed</h5>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :loaded_on_test, :format => :long, :if_blank => "-"  %>
+            <%= c.attribute :loaded_on_int, :format => :long, :if_blank => "-"  %>
+            <%= c.attribute :loaded_on_prod, :format => :long, :if_blank => "-" %>
+        <% end %>
+    </div>
+
+    <div class="col-md-3">
+        <h4><span class="glyphicon glyphicon-check"></span> Usage Dates</h4>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :start_of_user_acceptance_test, :format => :short %>
+        <% end %>
+    </div>
+    <div class="col-md-3">
+        <h4> &nbsp;</h4>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :start_of_usage_on_prod, :format => :short %>
+        <% end %>
+    </div>
+
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4><span class="glyphicon glyphicon-comment"></span> Remarks</h4>
+        <%= show_for @change do |c| %>
+            <%= c.attribute :comment, :if_blank => "-" %>
+            <%= c.attribute :change_log, :if_blank => "-" %>
+        <% end %>
+    </div>
+
+</div>
+
+<hr>
+
+<%= link_to 'Edit this CR', edit_change_path(@change), :class => "btn btn-primary" %>

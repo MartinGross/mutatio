@@ -1,0 +1,59 @@
+<h3>Changes by Phases</h3>
+
+<% [0,4,8,12].each do |my_offset| %>
+    <div class="row">
+
+        <% @statuses.offset(my_offset).limit(4).each do |status| %>
+            <div class="col-md-2">
+                <h4 class="text-center text-muted"><i><%= status.status  %></i></h4>
+                <ul class="list-group">
+                    <% @changes.where(change_status_id: status.id).each do |change| %>
+                        <%= link_to(change, class: 'list-group-item')  do %>
+                        <b>CR<%= change.number %></b> - <%= change.short_description %>
+                            <br><small class="text-muted"><%= change.user.try(:name) %></small>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </div>
+
+            <div class="col-md-1">
+                <div class="text-center"><span class="glyphicon  glyphicon-arrow-right text-muted" style="font-size:32px;"></span></div>
+            </div>
+        <% end %>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-11 ">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <p></p>
+        </div>
+    </div>
+<% end %>
+

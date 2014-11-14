@@ -1,0 +1,95 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('[data-behaviour~=datepicker]').datepicker({"format": "yyyy-mm-dd", "weekStart": 1, "autoclose": true, "clearBtn": true});
+  })
+</script>
+
+<%= simple_form_for @change, defaults: { input_html: { class: 'form-control' } } do |f| %>
+
+  <% if @change.errors.any? %>
+    <div class="alert alert-warning" id="error_explanation">
+      <p class="lead"><%= pluralize(@change.errors.count, "error") %> prohibited this change from being saved:</p>
+
+      <ul>
+      <% @change.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <%= f.input :number, placeholder: '1001' %>
+            <%= f.association :change_status, :label_method => lambda { |change_status| "#{change_status.number} - #{change_status.status}" } %>
+            <%= f.input :airline_id %>
+            <%= f.association :customer_contact, label: 'Requestor Change Manager'%>
+        </div>
+        <div class="col-md-3">
+            <%= f.input :short_description %>
+            <%= f.input :tracker_id %>
+            <%= f.input :priority %>
+            <%= f.association :user, label: 'Provider Change Manager' %>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <h4>Offer </h4>
+        <div class="col-md-3">
+            <%= f.input :accepted_at, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :offer_due_at, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+        <div class="col-md-3">
+            <%= f.input :offer_delivered_at, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :ordered_at, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <h4>Deployments</h4>
+        <div class="col-md-3">
+            <%= f.input :load_on_test, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :load_on_int, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :load_on_prod, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+        <div class="col-md-3">
+            <%= f.input :loaded_on_test, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :loaded_on_int, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+            <%= f.input :loaded_on_prod, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
+
+        <h4>Usage</h4>
+        <div class="col-md-3">
+            <%= f.input :start_of_user_acceptance_test, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+        <div class="col-md-3">
+            <%= f.input :start_of_usage_on_prod, :input_html => { data: {behaviour: "datepicker"}}, :as => :string %>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <h4><span class="glyphicon glyphicon-comment"></span> Remarks</h4>
+        <div class="col-md-6">
+            <%= f.input :change_log %>
+            <%= f.input :comment %>
+        </div>
+    </div>
+    <p></p>
+    <%= f.submit :class => 'btn btn-primary' %> <%= link_to 'Cancel', @change, data: { confirm: 'Updates will not be saved.  Are you sure?' }, :class => "btn btn-warning" %>
+
+<% end %>

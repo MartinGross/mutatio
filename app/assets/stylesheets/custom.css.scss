@@ -1,0 +1,49 @@
+// overwrite bootstrap variables in SASS notation
+$navbar-default-bg: #b8ccee;
+
+$tt-color: darken(#428bca, 20%);
+
+$tooltip-bg: $tt-color;
+$tooltip-arrow-color: $tt-color;
+
+@import "bootstrap";
+@import "bootstrap/theme";
+
+// define custom css
+body {
+  padding-top: 50px;
+}
+
+.starter-template {
+  padding: 40px 15px;
+}
+
+.wrapper .label {
+  display: inline;
+  padding: 0;
+  font-size: 100%;
+  font-weight: bold;
+  line-height: 1;
+  color: #acb3b3;
+  text-align: left;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em; }
+
+h1, h2, h3, h4 {
+  color: #50628B;
+}
+
+/*
+.tooltip-inner {
+  color: white;
+  background-color: #333;
+}
+
+.tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px 5px 0;
+  border-top-color: #333; }
+*/
